@@ -34,11 +34,14 @@ call plug#begin()
   " Final da instalação do fzf
   " ===  
 
-  Plug 'cohama/lexima.vim'
+  "Plug 'cohama/lexima.vim'
 
   Plug 'jiangmiao/auto-pairs'
 
+  "Multiple cursors plugin for vim/neovim
   Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+  Plug 'elixir-editors/vim-elixir'
 
 call plug#end()
 
@@ -151,6 +154,21 @@ set number
 " exibir números de linha acima ou abaixo relativos a linha atual
 " set relativenumber
 
+" Fazer split horizontal para baixo
+set splitbelow
+
+" Fazer split vertical para a direita
+set splitright
+
+" permite editar outros arquivos sem salvar um antes de abrir outro
+set hidden
+
+" Permite copiar do clipboard para o vim e do vim para o clipboard
+set clipboard+=unnamedplus
+
+" Ignora maiúsculas e minúsculas para buscas
+set ignorecase
+
 " Habilita a exibição de caracteres ocultos
 set list 
 
@@ -169,3 +187,15 @@ autocmd BufEnter * :syntax sync fromstart
 " v = visual
 " a = all (todos os modos)
 set mouse=a
+
+" Mover linha ou bloco de linhas pra cima e pra baixo (Shift+Alt+j e Shift+Alt+k)
+nnoremap <S-A-j> :m .+1<CR>==
+nnoremap <S-A-k> :m .-2<CR>==
+inoremap <S-A-j> <Esc>:m .+1<CR>==gi
+inoremap <S-A-k> <Esc>:m .-2<CR>==gi
+vnoremap <S-A-j> :m '>+1<CR>gv=gv
+vnoremap <S-A-k> :m '<-2<CR>gv=gv
+
+" Salvar usando CTRL + S
+nmap <c-s> :w<cr>
+imap <c-s> <Esc>:w<cr>a
